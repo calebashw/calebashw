@@ -29,55 +29,82 @@ function App() {
         </nav>
       </header>
       <main>
-        <section id="bio" className="App-section">
-          <h2>Bio</h2>
-          <p>
-            I'm Caleb Ash, a student at Dartmouth College studying computer science and economics. 
-          </p>
-        </section>
-        <section id="projects" className="App-section">
-          <h2>Projects</h2>
-          <div className="Project">
-            <h3>Phillies Twitter Bot</h3>
+        <div className="before-contact">
+          <section id="bio" className="bio-section">
+            <h2>About Me</h2>
             <p>
-              A Philadelphia Phillies Twitter bot posting daily highlights, game summaries, and other Phillies content during the MLB season.
-              Built with Python and various APIs
+              I'm Caleb Ash, a student at Dartmouth College studying computer science and economics. I'm interested in
+              full-stack development, software engineering, 
             </p>
-            <a
-              className="App-link"
-              href="https://github.com/calebashw/philstwitterbot"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View on GitHub
-            </a>
-            <p> </p>
-            <a 
-              href="https://x.com/philstweetbot" 
-              className="App-link" 
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View on X
-            </a>
-          </div>
-          <div className="Project">
-            <h3>Music & Mood Matcher</h3>
-            <p>
-              An app that matches your mood to a curated music playlist. Built
-              with React.
-            </p>
-            <a
-              className="App-link"
-              href="https://github.com/calebashw/music-mood-matcher"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View on GitHub
-            </a>
-          </div>
-        </section>
-        <section id="contact" className="App-section">
+          </section>
+          <section id="projects" className="App-section">
+            <h2>Projects</h2>
+            <div className="Project">
+              <h3>Phillies Twitter Bot</h3>
+              <p>
+                A Philadelphia Phillies Twitter bot posting daily highlights, game summaries, and other Phillies content during the MLB season.
+                Built with Python and various APIs
+              </p>
+              <a
+                className="App-link"
+                href="https://github.com/calebashw/philstwitterbot"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View on GitHub
+              </a>
+              <p> </p>
+              <a 
+                href="https://x.com/philstweetbot" 
+                className="App-link" 
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View on X
+              </a>
+            </div>
+            <div className="Project">
+              <h3>Tiny Search Engine</h3>
+              <p>
+                A crawler, indexer, and querier, all built in C that with provided data can act as a search engine.
+              </p>
+              {/* <a
+                className="App-link"
+                href="https://github.com/calebashw/music-mood-matcher"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View on GitHub
+              </a> */}
+            </div>
+          </section>
+          <section id="coursework" className="App-section">
+            <h2>
+              Coursework
+            </h2>
+            <div class="accordion">
+              <div class="accordion-item">
+                <button class="accordion-header">Intro to Programming and Computation (CS1)</button>
+                <div class="accordion-content">
+                  Topics: Python, fundamental programming skills, introduction to classes and objects.
+                </div>
+              </div>
+              <div class="accordion-item">
+                <button class="accordion-header">Problem Solving via Object-Oriented Programming</button>
+                <div class="accordion-content">
+                  Topics: Java, OOP, Data Structures, Algorithms
+                </div>
+              </div>
+              <div class="accordion-item">
+                <button class="accordion-header">Full-Stack Web Development</button>
+                <div class="accordion-content">
+                  Topics: React, Node.js, State Management, MongoDB, JavaScript, REST APIs, CRUD, etc.
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <section id="contact" className="contact-section">
           <h2>Contact Me</h2>
           <p>
             I'm currently open to opportunities! Feel free to reach out to me:
