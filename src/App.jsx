@@ -4,13 +4,17 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Welcome to Caleb Ash's Portfolio</h1>
+        <h1>Caleb Ash</h1>
         <p>
-          I'm a passionate developer focused on creating impactful and
-          innovative software solutions.
+          Passionate student and developer who enjoys problem-solving and creating
         </p>
         <nav>
           <ul className="App-nav">
+            <li>
+              <a className="App-link" href="#bio"> 
+                Bio
+              </a>
+            </li>
             <li>
               <a className="App-link" href="#projects">
                 Projects
@@ -25,6 +29,12 @@ function App() {
         </nav>
       </header>
       <main>
+        <section id="bio" className="App-section">
+          <h2>Bio</h2>
+          <p>
+            I'm Caleb Ash, a student at Dartmouth College studying computer science and economics. 
+          </p>
+        </section>
         <section id="projects" className="App-section">
           <h2>Projects</h2>
           <div className="Project">
@@ -81,7 +91,7 @@ function App() {
               LinkedIn:{" "}
               <a
                 className="App-link"
-                href="https://www.linkedin.com/in/calebashw"
+                href="https://www.linkedin.com/in/caleb-ash-606312247/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
