@@ -1,5 +1,9 @@
 ## Hi there 👋 I'm Caleb Ash, a computer science student at Dartmouth.
 
+### Checkout my [personal website](https://calebashw.github.io/calebashw/)
+
+### You can find my personal website, projects I've worked on, and other things I do.
+
 <!--
 **calebashw/calebashw** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
