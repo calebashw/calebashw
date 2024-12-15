@@ -96,6 +96,24 @@ function App() {
                 </div>
               </div>
               <div class="accordion-item">
+                <button class="accordion-header">Software Design & Implementation</button>
+                <div class="accordion-content">
+                  Topics: Software Design and Documentation, C, Debugging and Testing, Git
+                </div>
+              </div>
+              <div class="accordion-item">
+                <button class="accordion-header">Intro to Applied Computer Science</button>
+                <div class="accordion-content">
+                  Topics: Linear Algebra, Intro to ML
+                </div>
+              </div>
+              <div class="accordion-item">
+                <button class="accordion-header">Machine Learning and Statistical Data Analysis</button>
+                <div class="accordion-content">
+                  Topics: Python, Jupyter Notebooks, ML, Stastical Modeling
+                </div>
+              </div>
+              <div class="accordion-item">
                 <button class="accordion-header">Full-Stack Web Development</button>
                 <div class="accordion-content">
                   Topics: React, Node.js, State Management, MongoDB, JavaScript, REST APIs, CRUD, etc.
