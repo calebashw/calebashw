@@ -34,7 +34,7 @@ function App() {
             <h2>About Me</h2>
             <p>
               I'm Caleb Ash, a student at Dartmouth College studying computer science and economics. I'm interested in
-              full-stack development, software engineering, 
+              full-stack development, software engineering, and AI. Also love sports (go birds) and running. From Philadelphia and proud.
             </p>
           </section>
           <section id="projects" className="App-section">
@@ -43,7 +43,7 @@ function App() {
               <h3>Phillies Twitter Bot</h3>
               <p>
                 A Philadelphia Phillies Twitter bot posting daily highlights, game summaries, and other Phillies content during the MLB season.
-                Built with Python and various APIs
+                Built with Python and various APIs.
               </p>
               <a
                 className="App-link"
@@ -64,9 +64,37 @@ function App() {
               </a>
             </div>
             <div className="Project">
+              <h3>Medilink</h3>
+              <p>
+                MediLink is a funcitoning EMR, allowing for appointments scheduling, check ins, appointment notes, and other necessary funcitons for a doctors office.
+              </p>
+              <a
+                className="App-link"
+                href="https://brunchlabs.notion.site/Projects-82418b46babc4133bdee9f35f7d164be?p=c0234435571f4924b23366ffe9bd1b17&pm=c"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                See demo/results
+              </a>
+            </div>
+            <div className="Project">
               <h3>Tiny Search Engine</h3>
               <p>
                 A crawler, indexer, and querier, all built in C that with provided data can act as a search engine.
+              </p>
+              {/* <a
+                className="App-link"
+                href="https://github.com/calebashw/music-mood-matcher"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View on GitHub
+              </a> */}
+            </div>
+            <div className="Project">
+              <h3>Nuggets Game</h3>
+              <p>
+                Multiplayer terminal-based game with a functioning client and server written in C. Personally responsible for creating the client.
               </p>
               {/* <a
                 className="App-link"
