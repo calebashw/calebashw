@@ -1,190 +1,247 @@
 import './App.css';
+import { useEffect } from 'react';
 
 function App() {
+  // Function to handle accordion functionality
+  useEffect(() => {
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    
+    accordionHeaders.forEach(header => {
+      header.addEventListener('click', () => {
+        // Close all other accordion items
+        document.querySelectorAll('.accordion-content').forEach(content => {
+          if (content !== header.nextElementSibling) {
+            content.classList.remove('active');
+          }
+        });
+        
+        // Toggle the clicked accordion item
+        const content = header.nextElementSibling;
+        content.classList.toggle('active');
+      });
+    });
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Caleb Ash</h1>
-        <p>
-          Passionate student and developer who enjoys problem-solving and creating
-        </p>
-        <nav>
-          <ul className="App-nav">
-            <li>
-              <a className="App-link" href="#bio"> 
-                Bio
-              </a>
-            </li>
-            <li>
-              <a className="App-link" href="#projects">
-                Projects
-              </a>
-            </li>
-            <li>
-              <a className="App-link" href="#contact">
-                Contact
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </header>
-      <main>
-        <div className="before-contact">
-          <section id="bio" className="bio-section">
-            <h2>About Me</h2>
-            <p>
-              I'm Caleb Ash, a student at Dartmouth College studying computer science and economics. I'm interested in
-              full-stack development, software engineering, and AI. Also love sports (go birds) and running. From Philadelphia and proud.
-            </p>
-          </section>
-          <section id="projects" className="App-section">
-            <h2>Projects</h2>
-            <div className="Project">
-              <h3>Phillies Twitter Bot</h3>
-              <p>
-                A Philadelphia Phillies Twitter bot posting daily highlights, game summaries, and other Phillies content during the MLB season.
-                Built with Python and various APIs.
-              </p>
-              <a
-                className="App-link"
-                href="https://github.com/calebashw/philstwitterbot"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                View on GitHub
-              </a>
-              <p> </p>
-              <a 
-                href="https://x.com/philstweetbot" 
-                className="App-link" 
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                View on X
-              </a>
-            </div>
-            <div className="Project">
-              <h3>Medilink</h3>
-              <p>
-                MediLink is a funcitoning EMR, allowing for appointments scheduling, check ins, appointment notes, and other necessary funcitons for a doctors office.
-              </p>
-              <a
-                className="App-link"
-                href="https://brunchlabs.notion.site/Projects-82418b46babc4133bdee9f35f7d164be?p=c0234435571f4924b23366ffe9bd1b17&pm=c"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                See demo/results
-              </a>
-            </div>
-            <div className="Project">
-              <h3>Tiny Search Engine</h3>
-              <p>
-                A crawler, indexer, and querier, all built in C that with provided data can act as a search engine.
-              </p>
-              {/* <a
-                className="App-link"
-                href="https://github.com/calebashw/music-mood-matcher"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                View on GitHub
-              </a> */}
-            </div>
-            <div className="Project">
-              <h3>Nuggets Game</h3>
-              <p>
-                Multiplayer terminal-based game with a functioning client and server written in C. Personally responsible for creating the client.
-              </p>
-              {/* <a
-                className="App-link"
-                href="https://github.com/calebashw/music-mood-matcher"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                View on GitHub
-              </a> */}
-            </div>
-          </section>
-          <section id="coursework" className="App-section">
-            <h2>
-              Coursework
-            </h2>
-            <div class="accordion">
-              <div class="accordion-item">
-                <button class="accordion-header">Intro to Programming and Computation (CS1)</button>
-                <div class="accordion-content">
-                  Topics: Python, fundamental programming skills, introduction to classes and objects.
-                </div>
-              </div>
-              <div class="accordion-item">
-                <button class="accordion-header">Problem Solving via Object-Oriented Programming</button>
-                <div class="accordion-content">
-                  Topics: Java, OOP, Data Structures, Algorithms
-                </div>
-              </div>
-              <div class="accordion-item">
-                <button class="accordion-header">Software Design & Implementation</button>
-                <div class="accordion-content">
-                  Topics: Software Design and Documentation, C, Debugging and Testing, Git
-                </div>
-              </div>
-              <div class="accordion-item">
-                <button class="accordion-header">Intro to Applied Computer Science</button>
-                <div class="accordion-content">
-                  Topics: Linear Algebra, Intro to ML
-                </div>
-              </div>
-              <div class="accordion-item">
-                <button class="accordion-header">Machine Learning and Statistical Data Analysis</button>
-                <div class="accordion-content">
-                  Topics: Python, Jupyter Notebooks, ML, Stastical Modeling
-                </div>
-              </div>
-              <div class="accordion-item">
-                <button class="accordion-header">Full-Stack Web Development</button>
-                <div class="accordion-content">
-                  Topics: React, Node.js, State Management, MongoDB, JavaScript, REST APIs, CRUD, etc.
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-        <section id="contact" className="contact-section">
-          <h2>Contact Me</h2>
-          <p>
-            I'm currently open to opportunities! Feel free to reach out to me:
+    <div className="app">
+      <header className="header">
+        <div className="header-content">
+          <h1>Caleb Ash</h1>
+          <p className="header-tagline">
+            Software Developer & Student
           </p>
-          <ul className="Contact-list">
-            <li>
-              Email:{" "}
-              <a href="mailto:calebwilliam@comcast.net">calebwilliam@comcast.net</a>
-            </li>
-            <li>
-              LinkedIn:{" "}
+          
+          <nav className="nav">
+            <ul className="nav-list">
+              <li>
+                <a href="#about" className="nav-link">About</a>
+              </li>
+              <li>
+                <a href="#projects" className="nav-link">Projects</a>
+              </li>
+              <li>
+                <a href="#coursework" className="nav-link">Coursework</a>
+              </li>
+              <li>
+                <a href="#contact" className="nav-link">Contact</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main className="main">
+        <section id="about" className="section about-section">
+          <div className="container">
+            <h2 className="section-title">About Me</h2>
+            <div className="about-content">
+              <p>
+                I'm Caleb Ash, a student at Dartmouth College studying computer science and economics. 
+                I'm interested in full-stack development, software engineering, and AI. 
+                Also love sports (go birds) and running. From Philadelphia and proud.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="projects" className="section projects-section">
+          <div className="container">
+            <h2 className="section-title">Projects</h2>
+            <div className="projects-grid">
+              <div className="project-card">
+                <h3>Phillies Twitter Bot</h3>
+                <p>
+                  A Philadelphia Phillies Twitter bot posting daily highlights, game summaries, and other Phillies content during the MLB season.
+                  Built with Python and various APIs.
+                </p>
+                <div className="project-links">
+                  <a
+                    className="btn"
+                    href="https://github.com/calebashw/philstwitterbot"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    GitHub
+                  </a>
+                  <a 
+                    href="https://x.com/philstweetbot" 
+                    className="btn" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    View on X
+                  </a>
+                </div>
+              </div>
+
+              <div className="project-card">
+                <h3>Medilink</h3>
+                <p>
+                  MediLink is a functioning EMR, allowing for appointments scheduling, check-ins, appointment notes, and other necessary functions for a doctor's office.
+                </p>
+                <div className="project-links">
+                  <a
+                    className="btn"
+                    href="https://brunchlabs.notion.site/Projects-82418b46babc4133bdee9f35f7d164be?p=c0234435571f4924b23366ffe9bd1b17&pm=c"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    View Demo
+                  </a>
+                </div>
+              </div>
+
+              <div className="project-card">
+                <h3>Tiny Search Engine</h3>
+                <p>
+                  A crawler, indexer, and querier, all built in C that with provided data can act as a search engine.
+                </p>
+                {/* <div className="project-links">
+                  <a
+                    className="btn"
+                    href="https://github.com/calebashw/tiny-search-engine"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    GitHub
+                  </a>
+                </div> */}
+              </div>
+
+              <div className="project-card">
+                <h3>Nuggets Game</h3>
+                <p>
+                  Multiplayer terminal-based game with a functioning client and server written in C. Personally responsible for creating the client.
+                </p>
+                {/* <div className="project-links">
+                  <a
+                    className="btn"
+                    href="https://github.com/calebashw/nuggets-game"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    GitHub
+                  </a>
+                </div> */}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="coursework" className="section coursework-section">
+          <div className="container">
+            <h2 className="section-title">Coursework</h2>
+            <div className="accordion">
+              <div className="accordion-item">
+                <button className="accordion-header">Intro to Programming and Computation (CS1)</button>
+                <div className="accordion-content">
+                  <p>Topics: Python, fundamental programming skills, introduction to classes and objects.</p>
+                </div>
+              </div>
+              
+              <div className="accordion-item">
+                <button className="accordion-header">Problem Solving via Object-Oriented Programming</button>
+                <div className="accordion-content">
+                  <p>Topics: Java, OOP, Data Structures, Algorithms</p>
+                </div>
+              </div>
+              
+              <div className="accordion-item">
+                <button className="accordion-header">Software Design & Implementation</button>
+                <div className="accordion-content">
+                  <p>Topics: Software Design and Documentation, C, Debugging and Testing, Git</p>
+                </div>
+              </div>
+              
+              <div className="accordion-item">
+                <button className="accordion-header">Intro to Applied Computer Science</button>
+                <div className="accordion-content">
+                  <p>Topics: Linear Algebra, Intro to ML</p>
+                </div>
+              </div>
+              
+              <div className="accordion-item">
+                <button className="accordion-header">Machine Learning and Statistical Data Analysis</button>
+                <div className="accordion-content">
+                  <p>Topics: Python, Jupyter Notebooks, ML, Statistical Modeling</p>
+                </div>
+              </div>
+              
+              <div className="accordion-item">
+                <button className="accordion-header">Full-Stack Web Development</button>
+                <div className="accordion-content">
+                  <p>Topics: React, Node.js, State Management, MongoDB, JavaScript, REST APIs, CRUD, etc.</p>
+                </div>
+              </div>
+              <div className="accordion-item">
+                <button className="accordion-header">Discrete Mathematics</button>
+                <div className="accordion-content">
+                  <p>Topics: Proofs, Graph Theory, Combinatorics, Number Theory, etc.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="contact" className="section contact-section">
+          <div className="container">
+            <h2 className="section-title">Contact Me</h2>
+            <p className="contact-intro">
+              I'm currently open to opportunities! Feel free to reach out to me:
+            </p>
+            <div className="contact-links">
+              <a href="mailto:calebwilliam@comcast.net" className="contact-link">
+                <span className="contact-icon">✉️</span>
+                calebwilliam@comcast.net
+              </a>
               <a
-                className="App-link"
                 href="https://www.linkedin.com/in/caleb-ash-606312247/"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="contact-link"
               >
-                My LinkedIn Profile
+                <span className="contact-icon">💼</span>
+                LinkedIn
               </a>
-            </li>
-            <li>
-              GitHub:{" "}
               <a
-                className="App-link"
                 href="https://github.com/calebashw"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="contact-link"
               >
-                My GitHub
+                <span className="contact-icon">💻</span>
+                GitHub
               </a>
-            </li>
-          </ul>
+            </div>
+          </div>
         </section>
       </main>
+      
+      <footer className="footer">
+        <div className="container">
+          <p>© {new Date().getFullYear()} Caleb Ash. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 }
