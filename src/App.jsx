@@ -1,15 +1,40 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './index.css';
 
 function App() {
   const [activeAccordion, setActiveAccordion] = useState(null);
+  const [darkMode, setDarkMode] = useState(false);
+
+  // Check for saved dark mode preference or default to system preference
+  useEffect(() => {
+    const savedDarkMode = localStorage.getItem('darkMode');
+    if (savedDarkMode !== null) {
+      setDarkMode(JSON.parse(savedDarkMode));
+    } else {
+      setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches);
+    }
+  }, []);
+
+  // Update document class and save preference
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    localStorage.setItem('darkMode', JSON.stringify(darkMode));
+  }, [darkMode]);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
 
   const toggleAccordion = (index) => {
     setActiveAccordion(activeAccordion === index ? null : index);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
       {/* Header */}
       <header className="gradient-bg text-white relative overflow-hidden">
         {/* Background Pattern */}
@@ -25,42 +50,62 @@ function App() {
               Software Developer & Student
             </p>
             
-            {/* Navigation */}
-            <nav className="flex justify-center space-x-8">
-              {['About', 'Projects', 'Coursework', 'Contact'].map((item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className="text-white/90 hover:text-white font-medium transition-all duration-300 hover:scale-105 relative group"
-                >
-                  {item}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-                </a>
-              ))}
-            </nav>
+            {/* Navigation and Dark Mode Toggle */}
+            <div className="flex justify-center items-center space-x-8 mb-8">
+              <nav className="flex space-x-8">
+                {['About', 'Projects', 'Coursework', 'Contact'].map((item) => (
+                  <a
+                    key={item}
+                    href={`#${item.toLowerCase()}`}
+                    className="text-white/90 hover:text-white font-medium transition-all duration-300 hover:scale-105 relative group"
+                  >
+                    {item}
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                  </a>
+                ))}
+              </nav>
+              
+              {/* Dark Mode Toggle Button */}
+              <button
+                onClick={toggleDarkMode}
+                className="bg-white/10 backdrop-blur-sm rounded-lg p-3 hover:bg-white/20 transition-all duration-300 hover:scale-105"
+                aria-label="Toggle dark mode"
+              >
+                {darkMode ? (
+                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
+                  </svg>
+                ) : (
+                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                  </svg>
+                )}
+              </button>
+            </div>
           </div>
         </div>
       </header>
 
       <main>
         {/* About Section */}
-        <section id="about" className="py-20 bg-white">
+        <section id="about" className="py-20 bg-white dark:bg-gray-800 transition-colors duration-300">
           <div className="max-w-4xl mx-auto px-4">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">About Me</h2>
+              <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">About Me</h2>
               <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
             </div>
             
-            <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 md:p-12 shadow-lg">
+            <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-700 dark:to-gray-600 rounded-2xl p-8 md:p-12 shadow-lg transition-colors duration-300">
               <div className="flex items-center justify-center mb-6">
                 <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
                   CA
                 </div>
               </div>
-              <p className="text-lg text-gray-700 leading-relaxed text-center max-w-3xl mx-auto">
-                I'm Caleb Ash, a student at Dartmouth College studying computer science and economics. 
-                I'm passionate about full-stack development, software engineering, and AI. 
-                When I'm not coding, you'll find me cheering on the Philadelphia Eagles (go birds!) and hitting the trails for a run. 
+              <p className="text-lg text-gray-700 dark:text-gray-200 leading-relaxed text-center max-w-3xl mx-auto">
+                I'm Caleb Ash, a SWE intern at the Chicago Blackhawks and a student at Dartmouth College 
+                studying computer science and economics. I'm passionate about full-stack development, 
+                software engineering, and AI. When I'm not coding, you'll find me cheering on the 
+                Philadelphia Eagles (go birds!) and hitting the streets and trails for a run. 
                 Proud to be from Philadelphia and excited about the future of technology.
               </p>
             </div>
@@ -68,10 +113,10 @@ function App() {
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="py-20 bg-gray-50">
+        <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
           <div className="max-w-6xl mx-auto px-4">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">Projects</h2>
+              <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Projects</h2>
               <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
             </div>
             
@@ -82,9 +127,9 @@ function App() {
                   <div className="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center text-white font-bold mr-4">
                     🏟️
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900">Phillies Twitter Bot</h3>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">Phillies Twitter Bot</h3>
                 </div>
-                <p className="text-gray-600 mb-6 leading-relaxed">
+                <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
                   A Philadelphia Phillies Twitter bot posting daily highlights, game summaries, and other Phillies content during the MLB season.
                   Built with Python and various APIs.
                 </p>
@@ -114,9 +159,9 @@ function App() {
                   <div className="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center text-white font-bold mr-4">
                     🏥
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900">MediLink</h3>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">MediLink</h3>
                 </div>
-                <p className="text-gray-600 mb-6 leading-relaxed">
+                <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
                   MediLink is a functioning EMR, allowing for appointments scheduling, check-ins, appointment notes, and other necessary functions for a doctor's office.
                 </p>
                 <div className="flex space-x-3">
@@ -137,14 +182,14 @@ function App() {
                   <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center text-white font-bold mr-4">
                     🔍
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900">Tiny Search Engine</h3>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">Tiny Search Engine</h3>
                 </div>
-                <p className="text-gray-600 mb-6 leading-relaxed">
+                <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
                   A crawler, indexer, and querier, all built in C that with provided data can act as a search engine.
                 </p>
-                <div className="flex space-x-3">
+                {/* <div className="flex space-x-3">
                   <span className="text-gray-400 text-sm">Coming Soon</span>
-                </div>
+                </div> */}
               </div>
 
               {/* Nuggets Game */}
@@ -153,24 +198,24 @@ function App() {
                   <div className="w-12 h-12 bg-yellow-500 rounded-lg flex items-center justify-center text-white font-bold mr-4">
                     🎮
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900">Nuggets Game</h3>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">Nuggets Game</h3>
                 </div>
-                <p className="text-gray-600 mb-6 leading-relaxed">
+                <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
                   Multiplayer terminal-based game with a functioning client and server written in C. Personally responsible for creating the client.
                 </p>
-                <div className="flex space-x-3">
+                {/* <div className="flex space-x-3">
                   <span className="text-gray-400 text-sm">Coming Soon</span>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
         </section>
 
         {/* Coursework Section */}
-        <section id="coursework" className="py-20 bg-white">
+        <section id="coursework" className="py-20 bg-white dark:bg-gray-800 transition-colors duration-300">
           <div className="max-w-4xl mx-auto px-4">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">Coursework</h2>
+              <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Coursework</h2>
               <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
             </div>
             
@@ -208,11 +253,11 @@ function App() {
                 <div key={index} className="card overflow-hidden">
                   <button
                     onClick={() => toggleAccordion(index)}
-                    className="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-200"
+                    className="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
                   >
-                    <h3 className="text-lg font-semibold text-gray-900">{course.title}</h3>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{course.title}</h3>
                     <svg
-                      className={`w-5 h-5 text-gray-500 transition-transform duration-200 ${
+                      className={`w-5 h-5 text-gray-500 dark:text-gray-400 transition-transform duration-200 ${
                         activeAccordion === index ? 'rotate-180' : ''
                       }`}
                       fill="none"
@@ -228,7 +273,7 @@ function App() {
                     }`}
                   >
                     <div className="px-6 pb-6">
-                      <p className="text-gray-600">{course.content}</p>
+                      <p className="text-gray-600 dark:text-gray-300">{course.content}</p>
                     </div>
                   </div>
                 </div>
@@ -254,7 +299,7 @@ function App() {
               >
                 <div className="text-3xl mb-3">✉️</div>
                 <div className="font-medium">Email</div>
-                <div className="text-sm opacity-75">calebwilliam@comcast.net</div>
+                <div className="text-xs opacity-75">calebwilliam@comcast.net</div>
               </a>
               
               <a
