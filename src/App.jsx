@@ -1,245 +1,292 @@
-import './App.css';
-import { useEffect } from 'react';
+import { useState } from 'react';
+import './index.css';
 
 function App() {
-  // Function to handle accordion functionality
-  useEffect(() => {
-    const accordionHeaders = document.querySelectorAll('.accordion-header');
-    
-    accordionHeaders.forEach(header => {
-      header.addEventListener('click', () => {
-        // Close all other accordion items
-        document.querySelectorAll('.accordion-content').forEach(content => {
-          if (content !== header.nextElementSibling) {
-            content.classList.remove('active');
-          }
-        });
-        
-        // Toggle the clicked accordion item
-        const content = header.nextElementSibling;
-        content.classList.toggle('active');
-      });
-    });
-  }, []);
+  const [activeAccordion, setActiveAccordion] = useState(null);
+
+  const toggleAccordion = (index) => {
+    setActiveAccordion(activeAccordion === index ? null : index);
+  };
 
   return (
-    <div className="app">
-      <header className="header">
-        <div className="header-content">
-          <h1>Caleb Ash</h1>
-          <p className="header-tagline">
-            Software Developer & Student
-          </p>
-          
-          <nav className="nav">
-            <ul className="nav-list">
-              <li>
-                <a href="#about" className="nav-link">About</a>
-              </li>
-              <li>
-                <a href="#projects" className="nav-link">Projects</a>
-              </li>
-              <li>
-                <a href="#coursework" className="nav-link">Coursework</a>
-              </li>
-              <li>
-                <a href="#contact" className="nav-link">Contact</a>
-              </li>
-            </ul>
-          </nav>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+      {/* Header */}
+      <header className="gradient-bg text-white relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
+        
+        <div className="relative z-10 max-w-6xl mx-auto px-4 py-16">
+          <div className="text-center">
+            <h1 className="text-5xl md:text-6xl font-bold mb-4 animate-fade-in">
+              Caleb Ash
+            </h1>
+            <p className="text-xl md:text-2xl font-light mb-8 opacity-90 animate-slide-up">
+              Software Developer & Student
+            </p>
+            
+            {/* Navigation */}
+            <nav className="flex justify-center space-x-8">
+              {['About', 'Projects', 'Coursework', 'Contact'].map((item) => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  className="text-white/90 hover:text-white font-medium transition-all duration-300 hover:scale-105 relative group"
+                >
+                  {item}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                </a>
+              ))}
+            </nav>
+          </div>
         </div>
       </header>
 
-      <main className="main">
-        <section id="about" className="section about-section">
-          <div className="container">
-            <h2 className="section-title">About Me</h2>
-            <div className="about-content">
-              <p>
+      <main>
+        {/* About Section */}
+        <section id="about" className="py-20 bg-white">
+          <div className="max-w-4xl mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">About Me</h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
+            </div>
+            
+            <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 md:p-12 shadow-lg">
+              <div className="flex items-center justify-center mb-6">
+                <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                  CA
+                </div>
+              </div>
+              <p className="text-lg text-gray-700 leading-relaxed text-center max-w-3xl mx-auto">
                 I'm Caleb Ash, a student at Dartmouth College studying computer science and economics. 
-                I'm interested in full-stack development, software engineering, and AI. 
-                Also love sports (go birds) and running. From Philadelphia and proud.
+                I'm passionate about full-stack development, software engineering, and AI. 
+                When I'm not coding, you'll find me cheering on the Philadelphia Eagles (go birds!) and hitting the trails for a run. 
+                Proud to be from Philadelphia and excited about the future of technology.
               </p>
             </div>
           </div>
         </section>
 
-        <section id="projects" className="section projects-section">
-          <div className="container">
-            <h2 className="section-title">Projects</h2>
-            <div className="projects-grid">
-              <div className="project-card">
-                <h3>Phillies Twitter Bot</h3>
-                <p>
+        {/* Projects Section */}
+        <section id="projects" className="py-20 bg-gray-50">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">Projects</h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+              {/* Phillies Twitter Bot */}
+              <div className="card p-6 group">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center text-white font-bold mr-4">
+                    🏟️
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900">Phillies Twitter Bot</h3>
+                </div>
+                <p className="text-gray-600 mb-6 leading-relaxed">
                   A Philadelphia Phillies Twitter bot posting daily highlights, game summaries, and other Phillies content during the MLB season.
                   Built with Python and various APIs.
                 </p>
-                <div className="project-links">
+                <div className="flex space-x-3">
                   <a
-                    className="btn"
                     href="https://github.com/calebashw/philstwitterbot"
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="btn-primary text-sm"
                   >
                     GitHub
                   </a>
                   <a 
                     href="https://x.com/philstweetbot" 
-                    className="btn" 
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="btn-secondary text-sm"
                   >
                     View on X
                   </a>
                 </div>
               </div>
 
-              <div className="project-card">
-                <h3>Medilink</h3>
-                <p>
+              {/* Medilink */}
+              <div className="card p-6 group">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center text-white font-bold mr-4">
+                    🏥
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900">MediLink</h3>
+                </div>
+                <p className="text-gray-600 mb-6 leading-relaxed">
                   MediLink is a functioning EMR, allowing for appointments scheduling, check-ins, appointment notes, and other necessary functions for a doctor's office.
                 </p>
-                <div className="project-links">
+                <div className="flex space-x-3">
                   <a
-                    className="btn"
                     href="https://brunchlabs.notion.site/Projects-82418b46babc4133bdee9f35f7d164be?p=c0234435571f4924b23366ffe9bd1b17&pm=c"
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="btn-primary text-sm"
                   >
                     View Demo
                   </a>
                 </div>
               </div>
 
-              <div className="project-card">
-                <h3>Tiny Search Engine</h3>
-                <p>
+              {/* Tiny Search Engine */}
+              <div className="card p-6 group">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center text-white font-bold mr-4">
+                    🔍
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900">Tiny Search Engine</h3>
+                </div>
+                <p className="text-gray-600 mb-6 leading-relaxed">
                   A crawler, indexer, and querier, all built in C that with provided data can act as a search engine.
                 </p>
-                {/* <div className="project-links">
-                  <a
-                    className="btn"
-                    href="https://github.com/calebashw/tiny-search-engine"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    GitHub
-                  </a>
-                </div> */}
+                <div className="flex space-x-3">
+                  <span className="text-gray-400 text-sm">Coming Soon</span>
+                </div>
               </div>
 
-              <div className="project-card">
-                <h3>Nuggets Game</h3>
-                <p>
+              {/* Nuggets Game */}
+              <div className="card p-6 group">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-yellow-500 rounded-lg flex items-center justify-center text-white font-bold mr-4">
+                    🎮
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900">Nuggets Game</h3>
+                </div>
+                <p className="text-gray-600 mb-6 leading-relaxed">
                   Multiplayer terminal-based game with a functioning client and server written in C. Personally responsible for creating the client.
                 </p>
-                {/* <div className="project-links">
-                  <a
-                    className="btn"
-                    href="https://github.com/calebashw/nuggets-game"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                <div className="flex space-x-3">
+                  <span className="text-gray-400 text-sm">Coming Soon</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Coursework Section */}
+        <section id="coursework" className="py-20 bg-white">
+          <div className="max-w-4xl mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">Coursework</h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
+            </div>
+            
+            <div className="space-y-4">
+              {[
+                {
+                  title: "Intro to Programming and Computation (CS1)",
+                  content: "Topics: Python, fundamental programming skills, introduction to classes and objects."
+                },
+                {
+                  title: "Problem Solving via Object-Oriented Programming",
+                  content: "Topics: Java, OOP, Data Structures, Algorithms"
+                },
+                {
+                  title: "Software Design & Implementation",
+                  content: "Topics: Software Design and Documentation, C, Debugging and Testing, Git"
+                },
+                {
+                  title: "Intro to Applied Computer Science",
+                  content: "Topics: Linear Algebra, Intro to ML"
+                },
+                {
+                  title: "Machine Learning and Statistical Data Analysis",
+                  content: "Topics: Python, Jupyter Notebooks, ML, Statistical Modeling"
+                },
+                {
+                  title: "Full-Stack Web Development",
+                  content: "Topics: React, Node.js, State Management, MongoDB, JavaScript, REST APIs, CRUD, etc."
+                },
+                {
+                  title: "Discrete Mathematics",
+                  content: "Topics: Proofs, Graph Theory, Combinatorics, Number Theory, etc."
+                }
+              ].map((course, index) => (
+                <div key={index} className="card overflow-hidden">
+                  <button
+                    onClick={() => toggleAccordion(index)}
+                    className="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-200"
                   >
-                    GitHub
-                  </a>
-                </div> */}
-              </div>
+                    <h3 className="text-lg font-semibold text-gray-900">{course.title}</h3>
+                    <svg
+                      className={`w-5 h-5 text-gray-500 transition-transform duration-200 ${
+                        activeAccordion === index ? 'rotate-180' : ''
+                      }`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ${
+                      activeAccordion === index ? 'max-h-32 opacity-100' : 'max-h-0 opacity-0'
+                    }`}
+                  >
+                    <div className="px-6 pb-6">
+                      <p className="text-gray-600">{course.content}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        <section id="coursework" className="section coursework-section">
-          <div className="container">
-            <h2 className="section-title">Coursework</h2>
-            <div className="accordion">
-              <div className="accordion-item">
-                <button className="accordion-header">Intro to Programming and Computation (CS1)</button>
-                <div className="accordion-content">
-                  <p>Topics: Python, fundamental programming skills, introduction to classes and objects.</p>
-                </div>
-              </div>
-              
-              <div className="accordion-item">
-                <button className="accordion-header">Problem Solving via Object-Oriented Programming</button>
-                <div className="accordion-content">
-                  <p>Topics: Java, OOP, Data Structures, Algorithms</p>
-                </div>
-              </div>
-              
-              <div className="accordion-item">
-                <button className="accordion-header">Software Design & Implementation</button>
-                <div className="accordion-content">
-                  <p>Topics: Software Design and Documentation, C, Debugging and Testing, Git</p>
-                </div>
-              </div>
-              
-              <div className="accordion-item">
-                <button className="accordion-header">Intro to Applied Computer Science</button>
-                <div className="accordion-content">
-                  <p>Topics: Linear Algebra, Intro to ML</p>
-                </div>
-              </div>
-              
-              <div className="accordion-item">
-                <button className="accordion-header">Machine Learning and Statistical Data Analysis</button>
-                <div className="accordion-content">
-                  <p>Topics: Python, Jupyter Notebooks, ML, Statistical Modeling</p>
-                </div>
-              </div>
-              
-              <div className="accordion-item">
-                <button className="accordion-header">Full-Stack Web Development</button>
-                <div className="accordion-content">
-                  <p>Topics: React, Node.js, State Management, MongoDB, JavaScript, REST APIs, CRUD, etc.</p>
-                </div>
-              </div>
-              <div className="accordion-item">
-                <button className="accordion-header">Discrete Mathematics</button>
-                <div className="accordion-content">
-                  <p>Topics: Proofs, Graph Theory, Combinatorics, Number Theory, etc.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="contact" className="section contact-section">
-          <div className="container">
-            <h2 className="section-title">Contact Me</h2>
-            <p className="contact-intro">
+        {/* Contact Section */}
+        <section id="contact" className="py-20 gradient-bg text-white">
+          <div className="max-w-4xl mx-auto px-4 text-center">
+            <h2 className="text-4xl font-bold mb-4">Contact Me</h2>
+            <div className="w-24 h-1 bg-white mx-auto rounded-full mb-8"></div>
+            
+            <p className="text-xl mb-12 opacity-90 max-w-2xl mx-auto">
               I'm currently open to opportunities! Feel free to reach out to me:
             </p>
-            <div className="contact-links">
-              <a href="mailto:calebwilliam@comcast.net" className="contact-link">
-                <span className="contact-icon">✉️</span>
-                calebwilliam@comcast.net
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2xl mx-auto">
+              <a
+                href="mailto:calebwilliam@comcast.net"
+                className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all duration-300 hover:scale-105 group"
+              >
+                <div className="text-3xl mb-3">✉️</div>
+                <div className="font-medium">Email</div>
+                <div className="text-sm opacity-75">calebwilliam@comcast.net</div>
               </a>
+              
               <a
                 href="https://www.linkedin.com/in/caleb-ash-606312247/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="contact-link"
+                className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all duration-300 hover:scale-105 group"
               >
-                <span className="contact-icon">💼</span>
-                LinkedIn
+                <div className="text-3xl mb-3">💼</div>
+                <div className="font-medium">LinkedIn</div>
+                <div className="text-sm opacity-75">Connect with me</div>
               </a>
+              
               <a
                 href="https://github.com/calebashw"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="contact-link"
+                className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all duration-300 hover:scale-105 group"
               >
-                <span className="contact-icon">💻</span>
-                GitHub
+                <div className="text-3xl mb-3">💻</div>
+                <div className="font-medium">GitHub</div>
+                <div className="text-sm opacity-75">View my code</div>
               </a>
             </div>
           </div>
         </section>
       </main>
       
-      <footer className="footer">
-        <div className="container">
-          <p>© {new Date().getFullYear()} Caleb Ash. All rights reserved.</p>
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-8">
+        <div className="max-w-6xl mx-auto px-4 text-center">
+          <p className="opacity-75">© {new Date().getFullYear()} Caleb Ash. All rights reserved.</p>
         </div>
       </footer>
     </div>
