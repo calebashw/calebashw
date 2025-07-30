@@ -1,4 +1,4 @@
-## Hi there 👋 I'm Caleb Ash, a computer science student at Dartmouth.
+## Hi there 👋 I'm Caleb Ash, a computer science student at Dartmouth and a current SWE intern at the Chicago Blackhawks where I specialize in full stack work.
 
 ### Checkout my [personal website](https://calebashw.github.io/calebashw/)
 
